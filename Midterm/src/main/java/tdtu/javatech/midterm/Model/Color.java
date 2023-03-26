@@ -1,17 +1,16 @@
 package tdtu.javatech.midterm.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Color")
 public class Color implements Serializable {
     @Id
     @Column(name = "ID")
+
     private  int Id;
 
     @Column(name = "Name")
@@ -25,8 +24,8 @@ public class Color implements Serializable {
         this.name = name;
     }
 
-    public Color(int id, String name) {
-        Id = id;
+    public Color(String name) {
+
         this.name = name;
     }
 
@@ -38,6 +37,21 @@ public class Color implements Serializable {
     }
     public void setId(int id) {
         this.Id = id;
+    }
+
+    @OneToMany(mappedBy = "ID",cascade = CascadeType.ALL)
+    private List<Product> products;
+
+    public int getId() {
+        return Id;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override

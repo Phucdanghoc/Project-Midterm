@@ -13,9 +13,19 @@ public class Cart implements Serializable {
 
     @Column(name = "QUANTITY")
     private int Quantity;
+    @Column(name = "CREATED_AT")
+    private String created_at;
 
+    @ManyToOne
+    @JoinColumn(name = "PRO_ID")
+    private Product products;
     public Cart() {
 
+    }
+    public Cart(int id, int quantity, String created_at) {
+        Id = id;
+        Quantity = quantity;
+        this.created_at = created_at;
     }
 
     public int getId() {
@@ -24,16 +34,6 @@ public class Cart implements Serializable {
 
     public void setId(int id) {
         Id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "Id=" + Id +
-                ", Quantity=" + Quantity +
-                ", created_at='" + created_at + '\'' +
-                ", product=" + product +
-                '}';
     }
 
     public int getQuantity() {
@@ -52,23 +52,13 @@ public class Cart implements Serializable {
         this.created_at = created_at;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-    @Column(name = "CREATED_AT")
-    private String created_at;
 
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "PRO_ID")
-    private Product product;
-
-    public Cart(int id, int quantity, String created_at, Product product) {
-        Id = id;
-        Quantity = quantity;
-        this.created_at = created_at;
-        this.product = product;
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "Id=" + Id +
+                ", Quantity=" + Quantity +
+                ", created_at='" + created_at + '\'' +
+                '}';
     }
 }

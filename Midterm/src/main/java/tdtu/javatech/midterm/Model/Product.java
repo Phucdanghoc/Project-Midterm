@@ -3,11 +3,13 @@ package tdtu.javatech.midterm.Model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
 public class Product implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int ID;
 
@@ -27,16 +29,18 @@ public class Product implements Serializable {
     private String IMS_SRC;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "COL_ID")
+    @JoinColumn(name = "COL_ID")
     private Color Color;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "CAT_ID")
+    @JoinColumn(name = "CAT_ID")
     private Category category;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "BRA_ID")
+    @JoinColumn(name = "BRA_ID")
     private Brand brand;
+
+
 
     public Product() {
 
@@ -85,6 +89,30 @@ public class Product implements Serializable {
 
     public double getRate() {
         return Rate;
+    }
+
+    public tdtu.javatech.midterm.Model.Color getColor() {
+        return Color;
+    }
+
+    public void setColor(tdtu.javatech.midterm.Model.Color color) {
+        Color = color;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     public String getIMS_SRC() {
