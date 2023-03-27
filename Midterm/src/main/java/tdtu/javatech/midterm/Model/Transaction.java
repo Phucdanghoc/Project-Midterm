@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class Transaction implements Serializable {
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 
     @Column(name = "TOTAL_PRICE")
@@ -21,9 +22,6 @@ public class Transaction implements Serializable {
     private int status;
 
     @ManyToOne
-    @JoinColumn(name = "USE_ID")
-    private User user;
-    @ManyToOne
     @JoinColumn(name = "CAR_ID")
     private Cart cart ;
     public Transaction(int id, double total, String message, int status, User user) {
@@ -31,7 +29,6 @@ public class Transaction implements Serializable {
         this.total = total;
         this.message = message;
         this.status = status;
-        this.user = user;
     }
 
     public Transaction() {
@@ -71,13 +68,7 @@ public class Transaction implements Serializable {
         this.status = status;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
     @Override
     public String toString() {
         return "Transaction{" +
@@ -85,7 +76,6 @@ public class Transaction implements Serializable {
                 ", total=" + total +
                 ", message='" + message + '\'' +
                 ", status=" + status +
-                ", user=" + user +
                 '}';
     }
 }

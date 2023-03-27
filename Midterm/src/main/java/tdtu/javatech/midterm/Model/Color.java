@@ -10,7 +10,7 @@ import java.util.List;
 public class Color implements Serializable {
     @Id
     @Column(name = "ID")
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int Id;
 
     @Column(name = "Name")

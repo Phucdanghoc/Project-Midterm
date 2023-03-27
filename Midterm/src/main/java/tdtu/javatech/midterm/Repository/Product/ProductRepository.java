@@ -1,4 +1,4 @@
-package tdtu.javatech.midterm.Repository;
+package tdtu.javatech.midterm.Repository.Product;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

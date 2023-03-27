@@ -39,6 +39,12 @@ public class Brand implements Serializable {
         Phone = phone;
     }
 
+    public Brand(String name, String address, String phone) {
+        this.name = name;
+        Address = address;
+        Phone = phone;
+    }
+
     public Brand() {
 
     }

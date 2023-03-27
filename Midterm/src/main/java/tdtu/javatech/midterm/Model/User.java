@@ -1,17 +1,16 @@
 package tdtu.javatech.midterm.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
 
     @Column(name = "NAME")
@@ -31,6 +30,28 @@ public class User implements Serializable {
 
     @Column(name = "CREATED_AT")
     private  String created_at;
+
+    @OneToMany(mappedBy = "Id",cascade = CascadeType.ALL)
+    private List<Cart> cartList;
+
+    public List<Cart> getCartList() {
+        return cartList;
+    }
+
+    public void setCartList(List<Cart> cartList) {
+        this.cartList = cartList;
+    }
+
+    public User(int ID, String name, String email, String password, String address, String phone, String created_at, List<Cart> cartList) {
+        this.ID = ID;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.phone = phone;
+        this.created_at = created_at;
+        this.cartList = cartList;
+    }
 
     public User(int ID, String name, String email, String password, String address, String phone, String created_at) {
         this.ID = ID;

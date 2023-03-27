@@ -127,6 +127,16 @@ public class Product implements Serializable {
         Rate = rate;
         this.IMS_SRC = IMS_SRC;
     }
+
+    public Product(String name, Double price, String detail, double rate, String IMS_SRC    ) {
+        Name = name;
+        Price = price;
+        Detail = detail;
+        Rate = rate;
+        this.IMS_SRC = IMS_SRC;
+
+    }
+
     @Override
     public String toString() {
         return "Product{" +

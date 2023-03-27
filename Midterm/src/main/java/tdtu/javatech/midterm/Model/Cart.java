@@ -8,6 +8,7 @@ import java.io.Serializable;
 @Table(name = "cart")
 public class Cart implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int Id;
 
@@ -19,9 +20,39 @@ public class Cart implements Serializable {
     @ManyToOne
     @JoinColumn(name = "PRO_ID")
     private Product products;
+    @ManyToOne
+    @JoinColumn(name = "USE_ID")
+    private User user;
     public Cart() {
 
     }
+
+    public Cart(int id, int quantity, String created_at, Product products, User user) {
+        Id = id;
+        Quantity = quantity;
+        this.created_at = created_at;
+        this.products = products;
+        this.user = user;
+    }
+
+
+
+    public Product getProducts() {
+        return products;
+    }
+
+    public void setProducts(Product products) {
+        this.products = products;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Cart(int id, int quantity, String created_at) {
         Id = id;
         Quantity = quantity;
@@ -52,13 +83,14 @@ public class Cart implements Serializable {
         this.created_at = created_at;
     }
 
-
     @Override
     public String toString() {
         return "Cart{" +
                 "Id=" + Id +
                 ", Quantity=" + Quantity +
                 ", created_at='" + created_at + '\'' +
+                ", products=" + products +
+                ", user=" + user +
                 '}';
     }
 }

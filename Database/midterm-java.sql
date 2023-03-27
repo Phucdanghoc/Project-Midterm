@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 26, 2023 at 02:23 PM
+-- Generation Time: Mar 27, 2023 at 02:52 PM
 -- Server version: 8.0.32
 -- PHP Version: 8.1.10
 
@@ -47,6 +47,13 @@ CREATE TABLE `brand` (
   `PHONE` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `brand`
+--
+
+INSERT INTO `brand` (`ID`, `NAME`, `ADDRESS`, `PHONE`) VALUES
+(1, 'GUCCI', 'USA', '112120');
+
 -- --------------------------------------------------------
 
 --
@@ -55,6 +62,7 @@ CREATE TABLE `brand` (
 
 CREATE TABLE `cart` (
   `ID` int NOT NULL,
+  `USE_ID` int NOT NULL,
   `PRO_ID` int NOT NULL,
   `QUANTITY` int DEFAULT NULL,
   `CREATED_AD` datetime DEFAULT NULL
@@ -63,13 +71,20 @@ CREATE TABLE `cart` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `catetory`
+-- Table structure for table `category`
 --
 
-CREATE TABLE `catetory` (
+CREATE TABLE `category` (
   `ID` int NOT NULL,
   `NAME` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`ID`, `NAME`) VALUES
+(1, 'Shirt');
 
 -- --------------------------------------------------------
 
@@ -81,6 +96,14 @@ CREATE TABLE `color` (
   `ID` int NOT NULL,
   `NAME` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `color`
+--
+
+INSERT INTO `color` (`ID`, `NAME`) VALUES
+(1, 'pink'),
+(3, 'red');
 
 -- --------------------------------------------------------
 
@@ -109,7 +132,6 @@ CREATE TABLE `product` (
 CREATE TABLE `transaction` (
   `ID` int NOT NULL,
   `CAR_ID` int NOT NULL,
-  `USE_ID` int NOT NULL,
   `TOTAL_PRICE` float DEFAULT NULL,
   `MESSAGE` text,
   `STATUS` int DEFAULT NULL,
@@ -146,49 +168,104 @@ ALTER TABLE `admin`
 -- Indexes for table `brand`
 --
 ALTER TABLE `brand`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `NAME` (`NAME`);
 
 --
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_RELATIONSHIP_1` (`PRO_ID`);
+  ADD KEY `FK_CART_PRO` (`PRO_ID`),
+  ADD KEY `FK_USE_CART` (`USE_ID`);
 
 --
--- Indexes for table `catetory`
+-- Indexes for table `category`
 --
-ALTER TABLE `catetory`
-  ADD PRIMARY KEY (`ID`);
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `NAME` (`NAME`);
 
 --
 -- Indexes for table `color`
 --
 ALTER TABLE `color`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `NAME` (`NAME`);
 
 --
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_ASSOCIATION_3` (`CAT_ID`),
-  ADD KEY `FK_ASSOCIATION_4` (`BRA_ID`),
-  ADD KEY `FK_ASSOCIATION_5` (`COL_ID`);
+  ADD KEY `FK_PRO_BRA` (`BRA_ID`),
+  ADD KEY `FK_PRO_CAT` (`CAT_ID`),
+  ADD KEY `FK_PRO_CLO` (`COL_ID`);
 
 --
 -- Indexes for table `transaction`
 --
 ALTER TABLE `transaction`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_ASSOCIATION_6` (`USE_ID`),
-  ADD KEY `FK_ASSOCIATION_1` (`CAR_ID`);
+  ADD KEY `FK_CART_TRAC` (`CAR_ID`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `brand`
+--
+ALTER TABLE `brand`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `color`
+--
+ALTER TABLE `color`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -198,22 +275,22 @@ ALTER TABLE `user`
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `FK_RELATIONSHIP_1` FOREIGN KEY (`PRO_ID`) REFERENCES `product` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `FK_CART_PRO` FOREIGN KEY (`PRO_ID`) REFERENCES `product` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `FK_USE_CART` FOREIGN KEY (`USE_ID`) REFERENCES `user` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `FK_ASSOCIATION_3` FOREIGN KEY (`CAT_ID`) REFERENCES `catetory` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `FK_ASSOCIATION_4` FOREIGN KEY (`BRA_ID`) REFERENCES `brand` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `FK_ASSOCIATION_5` FOREIGN KEY (`COL_ID`) REFERENCES `color` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `FK_PRO_BRA` FOREIGN KEY (`BRA_ID`) REFERENCES `brand` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `FK_PRO_CAT` FOREIGN KEY (`CAT_ID`) REFERENCES `category` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `FK_PRO_CLO` FOREIGN KEY (`COL_ID`) REFERENCES `color` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `transaction`
 --
 ALTER TABLE `transaction`
-  ADD CONSTRAINT `FK_ASSOCIATION_1` FOREIGN KEY (`CAR_ID`) REFERENCES `cart` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `FK_ASSOCIATION_6` FOREIGN KEY (`USE_ID`) REFERENCES `user` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `FK_CART_TRAC` FOREIGN KEY (`CAR_ID`) REFERENCES `cart` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -10,7 +10,6 @@ import java.util.List;
 public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "ID")
     private int Id;
 
@@ -47,12 +46,14 @@ public class Category implements Serializable {
         Name = name;
     }
 
+    public Category( String name) {
+        Name = name;
+    }
+
     public Category(int id, String name) {
         Id = id;
         Name = name;
     }
-
-
 
     @Override
     public String toString() {
