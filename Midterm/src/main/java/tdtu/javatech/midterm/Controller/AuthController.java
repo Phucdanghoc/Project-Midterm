@@ -69,7 +69,8 @@ public class AuthController {
     public String listRegisteredUsers(Model model){
         List<UserDTO> users = userService.findAllUsers();
         model.addAttribute("users", users);
-        List<Product> items = ProductService.getInstance().getAll();
+        List<Product> items = new ArrayList<>();
+        repository.findAll().forEach(product -> items.add(product));
         model.addAttribute("pageTitle", "HomePage");
         model.addAttribute("items", items);
         return "index";

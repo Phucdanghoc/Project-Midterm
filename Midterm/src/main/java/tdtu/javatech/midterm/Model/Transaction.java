@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "transaction")
-public class Transaction implements Serializable {
+public class Transaction{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
@@ -27,7 +27,9 @@ public class Transaction implements Serializable {
     @JoinColumn(name = "CAR_ID")
     private Cart cart ;
 
-
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
     @Override
     public String toString() {

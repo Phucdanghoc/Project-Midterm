@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "cart")
-public class Cart implements Serializable {
+public class Cart{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;

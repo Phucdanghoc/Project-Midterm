@@ -24,4 +24,5 @@ public class HomeController {
         model.addAttribute("items", items);
         return "index";
     }
+
 }

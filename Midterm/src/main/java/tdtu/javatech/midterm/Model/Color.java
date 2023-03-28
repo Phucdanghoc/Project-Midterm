@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "Color")
-public class Color implements Serializable {
+public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int Id;
