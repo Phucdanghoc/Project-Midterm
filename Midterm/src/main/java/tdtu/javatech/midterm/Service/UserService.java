@@ -6,7 +6,8 @@ import tdtu.javatech.midterm.Model.UserDTO;
 
 import java.util.List;
 
-public interface UserService {
+
+public interface UserService  {
     void saveUser(UserDTO userDto);
 
     User findByEmail(String email);

@@ -85,6 +85,11 @@ label {
 .nav-pills.with-background .nav-link.active:hover {
   color: #fff;
 }
+
+.card-title .pricing-card-title{
+  color: #00aced;
+
+}
 .nav-pills.with-background .nav-link.active:after {
   content: "";
   position: absolute;
@@ -1335,7 +1340,7 @@ ul.pagination .active a {
   padding: 20px;
 }
 .product-item .card .card-body .card-title {
-  font-size: 18px;
+  font-size: 23px;
   margin-bottom: 5px;
   font-weight: 600;
 }

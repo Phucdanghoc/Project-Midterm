@@ -6,18 +6,21 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Getter
-@Setter
 @Table(name = "role")
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private int id;
+
+    @Column(nullable = false,unique = true)
     private String name;
+
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 }

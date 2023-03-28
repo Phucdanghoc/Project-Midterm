@@ -1,4 +1,4 @@
-package tdtu.javatech.midterm.Service;
+package tdtu.javatech.midterm.Service.Implements;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -7,18 +7,20 @@ import tdtu.javatech.midterm.Model.User;
 import tdtu.javatech.midterm.Model.UserDTO;
 import tdtu.javatech.midterm.Repository.Person.RoleRepository;
 import tdtu.javatech.midterm.Repository.Person.UserRepository;
+import tdtu.javatech.midterm.Service.UserService;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImp implements UserService{
+public class UserServiceImpl implements UserService {
+
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
 
-    public UserServiceImp(UserRepository userRepository,
+    public UserServiceImpl(UserRepository userRepository,
                            RoleRepository roleRepository,
                            PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;

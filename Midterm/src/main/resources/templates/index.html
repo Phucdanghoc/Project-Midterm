@@ -1,9 +1,9 @@
 <html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<!-- ** Basic Page Needs ** -->
 	<meta charset="utf-8">
-	<title>Classimax | Classified Marketplace Template</title>
+	<title th:text="${pageTitle}"></title>
 
 	<!-- ** Mobile Specific Metas ** -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -142,7 +142,7 @@
 							</ul>
 							<ul class="navbar-nav ml-auto mt-10">
 								<li class="nav-item">
-									<a class="nav-link login-button" href="login.html">Login</a>
+									<a class="nav-link login-button" href="login.html">Log out</a>
 
 								</li>
 								<li class="nav-item">
@@ -193,8 +193,8 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="section-title">
-						<h2>Trending Adds</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, magnam.</p>
+						<h2>All product</h2>
+						<p>This is product about fashion</p>
 					</div>
 				</div>
 			</div>
@@ -202,35 +202,34 @@
 				<!-- offer 01 -->
 				<div class="col-lg-12">
 
-					<div class="trending-ads-slide slick-initialized slick-slider">
+					<div class="trending-ads-slide slick-initialized slick-slider"  th:each="item:${items}">
 						<div class="col-sm-12 col-lg-4 slick-slide slick-cloned" tabindex="-1"
 							style="width: 356px;height: 430.438px;" data-slick-index="-1" id="" aria-hidden="true">
 							<!-- product card -->
 							<div class="product-item bg-light">
 								<div class="card">
 									<div class="thumb-content">
-										<a href="single.html" tabindex="-1">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg"
-												alt="Card image cap">
+										<a th:href='@{${"/users/product?id=" + item.getID()}}' tabindex="-1">
+											<img class="card-img-top img-fluid"  th:src='@{${"images/products/" + item.getIMG_SRC()}}' alt="Card image cap">
 										</a>
 									</div>
 									<div class="card-body">
-										<h4 class="card-title"><a href="single.html" tabindex="-1">Full Study Table
-												Combo</a></h4>
+										<h4 class="card-title"><a th:href='@{${"product?id=" + item.getID()}}'  tabindex="-1" th:text="${item.getName()}"></a></h4>
 										<ul class="list-inline product-meta">
 											<li class="list-inline-item">
-												<a href="single.html" tabindex="-1"><i
-														class="fa fa-folder-open-o"></i>Furnitures</a>
+												<a th:href='@{${"product?id=" + item.getID()}}'  tabindex="-1"><i class="fa fa-folder-open-o"></i>More</a>
 											</li>
 											<li class="list-inline-item">
-												<a href="category.html" tabindex="-1"><i class="fa fa-calendar"></i>26th
-													December</a>
+												<a th:href='@{${"product?category=" + item.getCategory().getName()}}'  tabindex="-1"><i class="fa fa-category" th:text="${item.getCategory().getName()}"></i ></a>
+											</li>
+											<li class="list-inline-item">
+												<a th:href='@{${"product?category=" + item.getCategory().getName()}}' tabindex="-1"><i class="card-title pricing-card-title " th:text="${item.getPrice()+'$'}"></i ></a>
 											</li>
 										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											Explicabo, aliquam!</p>
+										<p class="card-text" th:text="${item.getDetail()}"></p>
 										<div class="product-ratings">
-											<ul class="list-inline">
+											<ul class="list-inline" >
+
 												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
 												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
 												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
@@ -244,343 +243,7 @@
 
 						</div>
 					</div>
-					<div class="trending-ads-slide slick-initialized slick-slider">
-						<div class="col-sm-12 col-lg-4 slick-slide slick-cloned" tabindex="-1"
-							style="width: 356px;height: 430.438px;" data-slick-index="-1" id="" aria-hidden="true">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<a href="single.html" tabindex="-1">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg"
-												alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html" tabindex="-1">Full Study Table
-												Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html" tabindex="-1"><i
-														class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="category.html" tabindex="-1"><i class="fa fa-calendar"></i>26th
-													December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
 
-						</div>
-					</div>
-					<div class="trending-ads-slide slick-initialized slick-slider">
-						<div class="col-sm-12 col-lg-4 slick-slide slick-cloned" tabindex="-1"
-							style="width: 356px;height: 430.438px;" data-slick-index="-1" id="" aria-hidden="true">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<a href="single.html" tabindex="-1">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg"
-												alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html" tabindex="-1">Full Study Table
-												Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html" tabindex="-1"><i
-														class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="category.html" tabindex="-1"><i class="fa fa-calendar"></i>26th
-													December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-					<div class="trending-ads-slide slick-initialized slick-slider">
-						<div class="col-sm-12 col-lg-4 slick-slide slick-cloned" tabindex="-1"
-							style="width: 356px;height: 430.438px;" data-slick-index="-1" id="" aria-hidden="true">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<a href="single.html" tabindex="-1">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg"
-												alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html" tabindex="-1">Full Study Table
-												Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html" tabindex="-1"><i
-														class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="category.html" tabindex="-1"><i class="fa fa-calendar"></i>26th
-													December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-					<div class="trending-ads-slide slick-initialized slick-slider">
-						<div class="col-sm-12 col-lg-4 slick-slide slick-cloned" tabindex="-1"
-							style="width: 356px;height: 430.438px;" data-slick-index="-1" id="" aria-hidden="true">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<a href="single.html" tabindex="-1">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg"
-												alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html" tabindex="-1">Full Study Table
-												Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html" tabindex="-1"><i
-														class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="category.html" tabindex="-1"><i class="fa fa-calendar"></i>26th
-													December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-					<div class="trending-ads-slide slick-initialized slick-slider">
-						<div class="col-sm-12 col-lg-4 slick-slide slick-cloned" tabindex="-1"
-							style="width: 356px;height: 430.438px;" data-slick-index="-1" id="" aria-hidden="true">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<a href="single.html" tabindex="-1">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg"
-												alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html" tabindex="-1">Full Study Table
-												Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html" tabindex="-1"><i
-														class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="category.html" tabindex="-1"><i class="fa fa-calendar"></i>26th
-													December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-					<div class="trending-ads-slide slick-initialized slick-slider">
-						<div class="col-sm-12 col-lg-4 slick-slide slick-cloned" tabindex="-1"
-							style="width: 356px;height: 430.438px;" data-slick-index="-1" id="" aria-hidden="true">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<a href="single.html" tabindex="-1">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg"
-												alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html" tabindex="-1">Full Study Table
-												Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html" tabindex="-1"><i
-														class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="category.html" tabindex="-1"><i class="fa fa-calendar"></i>26th
-													December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-					<div class="trending-ads-slide slick-initialized slick-slider">
-						<div class="col-sm-12 col-lg-4 slick-slide slick-cloned" tabindex="-1"
-							style="width: 356px;height: 430.438px;" data-slick-index="-1" id="" aria-hidden="true">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<a href="single.html" tabindex="-1">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg"
-												alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html" tabindex="-1">Full Study Table
-												Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html" tabindex="-1"><i
-														class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="category.html" tabindex="-1"><i class="fa fa-calendar"></i>26th
-													December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-					<div class="trending-ads-slide slick-initialized slick-slider">
-						<div class="col-sm-12 col-lg-4 slick-slide slick-cloned" tabindex="-1"
-							style="width: 356px;height: 430.438px;" data-slick-index="-1" id="" aria-hidden="true">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<a href="single.html" tabindex="-1">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg"
-												alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html" tabindex="-1">Full Study Table
-												Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html" tabindex="-1"><i
-														class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="category.html" tabindex="-1"><i class="fa fa-calendar"></i>26th
-													December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-											Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-
-					</div>
 				</div>
 			</div>
 		</div>
