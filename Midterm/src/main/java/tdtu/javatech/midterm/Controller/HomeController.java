@@ -1,5 +1,6 @@
 package tdtu.javatech.midterm.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +16,11 @@ public class HomeController {
     public static HomeController getInstance() {
         return new HomeController();
     }
+    @Autowired
     private ProductRepository repository;
     @GetMapping("/index")
     public String hone(Model model){
-        List<Product> items = new ArrayList<>();
-        repository.findAll().forEach(product -> items.add(product));
+        List<Product> items = repository.findAll();
         model.addAttribute("pageTitle", "HomePage");
         model.addAttribute("items", items);
         return "index";

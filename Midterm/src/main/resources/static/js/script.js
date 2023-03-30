@@ -193,5 +193,4 @@
     $('.value').text('$' + slideEvt.value[0] + ' - ' + '$' + slideEvt.value[1]);
   });
 
-
 })(jQuery);
