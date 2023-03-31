@@ -1,5 +1,7 @@
 package tdtu.javatech.midterm.Controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,40 +13,40 @@ import tdtu.javatech.midterm.Model.Product;
 import tdtu.javatech.midterm.Model.User;
 import tdtu.javatech.midterm.Repository.Action.CartRepository;
 import tdtu.javatech.midterm.Repository.Product.ProductRepository;
+import tdtu.javatech.midterm.Service.CartService;
+import tdtu.javatech.midterm.Service.ProductService;
+import tdtu.javatech.midterm.Service.UserService;
 
 import java.util.Date;
 
 @Controller
 @RequestMapping("/")
 public class ProductController {
+
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
+
     @Autowired
-    private CartRepository cartRepository;
+    private CartService cartService;
+
+    @Autowired
+    private UserService userService;
+
     @GetMapping("product")
     public String getID(@RequestParam String id, Model model){
 
-        System.out.println(model.toString());
-        Product product = productRepository.findById(Integer.parseInt(id)).get();
+        model.addAttribute("product", productService.getById(id));
+        model.addAttribute("cart",new Cart());
 
-        System.out.println(product.getIMG_SRC());
-        model.addAttribute("product",product);
-
-        Cart cart = new Cart();
-        model.addAttribute("cart",cart);
         return  "single";
     }
     @PostMapping("product")
-    public  String  AddIntoCart(@ModelAttribute("cart") Cart cart,@ModelAttribute("ID") String ID){
-        System.out.println(ID);
-        User user = new User();
-        user.setID(1);
-        cart.setProducts(productRepository.findById(Integer.parseInt(ID)).get());
-        cart.setUser(user);
+    public  String  AddIntoCart(@ModelAttribute("cart") Cart cart, @ModelAttribute("ID") String ID,HttpServletRequest request){
+
+        cart.setProducts(productService.getById(ID));
+        cart.setUser(userService.getById((String) request.getSession().getAttribute("id")));
         cart.setCreated_at(String.valueOf(new Date()));
-
-        cartRepository.save(cart);
-
+        cartService.Save(cart);
         return "dashboard";
     }
 }

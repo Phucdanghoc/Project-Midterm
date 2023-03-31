@@ -13,9 +13,8 @@ import tdtu.javatech.midterm.Service.ProductService;
 
 @SpringBootApplication
 public class MidtermApplication implements CommandLineRunner {
-
-    private ProductService productService;
     @Autowired
+    private ProductService productService;
     private ProductRepository productRepository;
     @Autowired
     private ColorRepository colorRepository;
@@ -32,8 +31,7 @@ public class MidtermApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        ProductServiceImp.getInstance().getAll());
-//        productRepository.findAll()
-        productRepository.findAll().forEach(p-> System.out.println(p.getName()));
+
+
     }
 }
