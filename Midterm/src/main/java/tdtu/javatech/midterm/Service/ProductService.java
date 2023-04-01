@@ -11,4 +11,9 @@ import java.util.List;
 public interface ProductService {
     List<Product> getAll();
     Product getById(String id);
+
+
+    List<Product> searchByName(String name);
+    List<Product> searchByCategory(String category);
+    List<Product> searchByColor(String color);
 }

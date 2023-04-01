@@ -1,5 +1,6 @@
 package tdtu.javatech.midterm.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,12 +24,18 @@ public class Transaction{
 
     private int status;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date created;
+
+
     @ManyToOne
     @JoinColumn(name = "CAR_ID")
+    @JsonIgnore
     private Cart cart ;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
+    @JsonIgnore
     private User user;
 
     @Override

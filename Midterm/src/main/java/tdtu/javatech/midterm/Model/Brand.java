@@ -1,5 +1,6 @@
 package tdtu.javatech.midterm.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,19 +18,13 @@ public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
-    private String name;
+    @Column(name = "name")
+    private String brandName;
     private String Address;
     private String Phone;
     @OneToMany(mappedBy = "ID",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Product> products;
 
-    @Override
-    public String toString() {
-        return "Brand{" +
-                "Id=" + Id +
-                ", name='" + name + '\'' +
-                ", Address='" + Address + '\'' +
-                ", Phone='" + Phone + '\'' +
-                '}';
-    }
+
 }

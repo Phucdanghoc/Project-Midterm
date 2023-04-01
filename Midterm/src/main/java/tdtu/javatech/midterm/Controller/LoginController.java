@@ -22,23 +22,20 @@ public class LoginController {
     private UserService userService;
     @GetMapping("login")
     public String Show(Model model){
-
         model.addAttribute("user",new User());
         return "login";
     }
     @PostMapping("login")
-    public String Login(@ModelAttribute("user") User user,HttpServletRequest request){
+    public String Login(@ModelAttribute("user") User user,HttpSession request){
         User userCheck = userService.Check(user);
-        HttpSession session = request.getSession();
         if (userCheck!=null){
-            System.out.println("ok");
-            session.setAttribute("id",userCheck.getID());
+            request.setAttribute("id",userCheck.getID());
+            System.out.println(request.getAttribute("id"));
             return "redirect:/";
         }
         else {
-            session.setAttribute("id","null");
             return  "register";
         }
-
     }
+
 }

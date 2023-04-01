@@ -1,5 +1,6 @@
 package tdtu.javatech.midterm.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,13 +17,15 @@ public class Cart{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
-
     private int Quantity;
     private String created_at;
 
     @ManyToOne
+    @JoinColumn(name = "PRO_ID")
+    @JsonIgnore
     private Product products;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "USE_ID")
     private User user;
     @Override

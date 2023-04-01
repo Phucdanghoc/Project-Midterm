@@ -34,19 +34,19 @@ public class ProductController {
 
     @GetMapping("product")
     public String getID(@RequestParam String id, Model model){
-
         model.addAttribute("product", productService.getById(id));
         model.addAttribute("cart",new Cart());
-
         return  "single";
     }
     @PostMapping("product")
-    public  String  AddIntoCart(@ModelAttribute("cart") Cart cart, @ModelAttribute("ID") String ID,HttpServletRequest request){
-
+    public  String  AddIntoCart(@ModelAttribute("cart") Cart cart, @ModelAttribute("ID") String ID,HttpSession request){
+        if (request.getAttribute("id")==null) {
+            return "redirect:login?mess=login-to-order";
+        }
         cart.setProducts(productService.getById(ID));
-        cart.setUser(userService.getById((String) request.getSession().getAttribute("id")));
+        cart.setUser(userService.getById(request.getAttribute("id").toString()));
         cart.setCreated_at(String.valueOf(new Date()));
         cartService.Save(cart);
-        return "dashboard";
+        return "redirect:/?add=true";
     }
 }

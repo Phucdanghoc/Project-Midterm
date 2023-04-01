@@ -17,7 +17,8 @@ public class Product  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
 
-    private String Name;
+    @Column(name = "name")
+    private String productName;
 
     private Double Price;
 
@@ -27,18 +28,17 @@ public class Product  {
 
     private String IMG_SRC;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "COL_ID")
 
     private Color color;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CAT_ID")
     private Category category;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BRA_ID")
-
     private Brand brand;
 
 

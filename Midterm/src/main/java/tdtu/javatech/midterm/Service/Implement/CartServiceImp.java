@@ -1,5 +1,6 @@
 package tdtu.javatech.midterm.Service.Implement;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tdtu.javatech.midterm.Model.Cart;
 import tdtu.javatech.midterm.Repository.Action.CartRepository;
@@ -9,10 +10,16 @@ import java.util.List;
 
 @Service
 public class CartServiceImp implements CartService {
+    @Autowired
     private CartRepository cartRepository;
     @Override
     public List<Cart> getAll() {
         return cartRepository.findAll();
+    }
+
+    @Override
+    public void Delete(String id) {
+        cartRepository.deleteById(Integer.parseInt(id));
     }
 
     @Override

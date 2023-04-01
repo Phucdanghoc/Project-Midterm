@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import tdtu.javatech.midterm.Model.User;
 import tdtu.javatech.midterm.Repository.Person.AdminRepository;
+import tdtu.javatech.midterm.Repository.Person.UserRepository;
 import tdtu.javatech.midterm.Repository.Product.BrandRepository;
 import tdtu.javatech.midterm.Repository.Product.CategoryRepository;
 import tdtu.javatech.midterm.Repository.Product.ColorRepository;
@@ -15,6 +17,7 @@ import tdtu.javatech.midterm.Service.ProductService;
 public class MidtermApplication implements CommandLineRunner {
     @Autowired
     private ProductService productService;
+    @Autowired
     private ProductRepository productRepository;
     @Autowired
     private ColorRepository colorRepository;
@@ -24,14 +27,12 @@ public class MidtermApplication implements CommandLineRunner {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
-    private AdminRepository adminRepository;
+    private UserRepository user;
     public static void main(String[] args) {
         SpringApplication.run(MidtermApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-
-
     }
 }

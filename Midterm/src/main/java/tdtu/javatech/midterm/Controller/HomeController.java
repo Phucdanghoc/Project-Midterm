@@ -1,41 +1,50 @@
 package tdtu.javatech.midterm.Controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import tdtu.javatech.midterm.Model.Product;
-import tdtu.javatech.midterm.Repository.Product.ProductRepository;
+import org.springframework.web.bind.annotation.*;
 import tdtu.javatech.midterm.Service.ProductService;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Controller
+@RequestMapping("/")
 public class HomeController {
 
     @Autowired
     private ProductService productService;
-    @GetMapping("/")
-    public String home(Model model,HttpServletRequest request){
-
-        if (!CheckSession(request)){
-            return "redirect:login";
+    @GetMapping("")
+    public String home(Model model, HttpSession request){
+        if (CheckSession(request)){
+            return "redirect:login?login_false";
         }
-
         model.addAttribute("pageTitle", "HomePage");
         model.addAttribute("items", productService.getAll());
         return "index";
     }
-    @PostMapping("/")
-    public String Search(Model model, @ModelAttribute("key") String key){
-        
+    @PostMapping("")
+    public String Search(Model model, @RequestParam("key") String key, @RequestParam("type") String type){
+        System.out.println(key);
+        switch (type){
+            case "1":
+                model.addAttribute("items",productService.searchByName(key));
+                return "index";
+            case "2":
+                model.addAttribute("items",productService.searchByCategory(key));
+                return "index";
+            case "3":
+                model.addAttribute("items",productService.searchByColor(key));
+                return "index";
+
+        }
+        model.addAttribute("items",null);
+        return "index";
     }
-    private static boolean CheckSession(HttpServletRequest request){
-        return  request.getSession().getAttribute("id").equals("null") ? false:true;
+    private static boolean CheckSession(HttpSession request){
+        return  request.getAttribute("id") == "null" ? true:false;
     }
 }

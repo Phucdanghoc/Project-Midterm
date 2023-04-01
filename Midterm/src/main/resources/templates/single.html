@@ -24,90 +24,12 @@
 	<link th:href='@{/plugins/slick/slick.css}' rel="stylesheet">
 	<link th:href='@{/plugins/slick/slick-theme.css}' rel="stylesheet">
 	<link th:href='@{/plugins/jquery-nice-select/css/nice-select.css}' rel="stylesheet">
-
 	<link th:href='@{/css/style.css}' rel="stylesheet">
 
-	<script type="text/javascript" charset="UTF-8" th:src='@{https://maps.googleapis.com/maps-api-v3/api/js/52/6/intl/vi_ALL/common.js}'></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/52/6/intl/vi_ALL/util.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/52/6/intl/vi_ALL/map.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/52/6/intl/vi_ALL/marker.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/52/6/intl/vi_ALL/onion.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/52/6/intl/vi_ALL/controls.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/52/6/intl/vi_ALL/common.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/52/6/intl/vi_ALL/util.js"></script></head>
 
 <body class="body-wrapper">
 
-<header>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<nav class="navbar navbar-expand-lg navbar-light navigation">
-					<a class="navbar-brand" href="index.html">
-						<img src="images/logo.png" alt="">
-					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav ml-auto main-nav ">
-							<li class="nav-item @@home">
-								<a class="nav-link" href="">Home</a>
-							</li>
-							<li class="nav-item dropdown dropdown-slide @@dashboard">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#!">Dashboard<span><i class="fa fa-angle-down"></i></span>
-								</a>
-
-								<!-- Dropdown list -->
-
-							</li>
-							<li class="nav-item dropdown dropdown-slide active">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Pages <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item @@profile" href="user-profile.html">User Profile</a></li>
-									<li><a class="dropdown-item @@404" href="404.html">404 Page</a></li>
-									<li><a class="dropdown-item @@store" href="store.html">Store Single</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown dropdown-slide @@listing">
-								<a class="nav-link dropdown-toggle" href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Listing <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-
-							</li>
-						</ul>
-						<ul class="navbar-nav ml-auto mt-10">
-							<li class="nav-item">
-								<a class="nav-link login-button" href="/login">Login</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
-</header>
-<section class="page-search">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<!-- Advance Search -->
-				<div class="advance-search nice-select-white">
-					<form>
-						<div class="form-row align-items-center">
-							<div class="form-group col-xl-10 col-lg-3 col-md-6">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">
-							</div>
-							<div class="form-group col-xl-2 col-lg-3 col-md-6">
-								<button type="submit" class="btn btn-primary active w-100">Search Now</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!--===================================
-=            Store Section            =
-====================================-->
+<header th:replace="~{Layout/header}"></header>
 <section class="section bg-gray">
 	<!-- Container Start -->
 	<div class="container">
@@ -122,7 +44,7 @@
 
 						</div>
 						<div class="widget price text-center">
-							Quantity	<input type="number" th:field="*{quantity}" name="qty" value="" min="0" max="1000" style="background-size:100px " step="1"/>
+							Quantity	<input type="number" th:field="*{quantity}" name="qty" value="" min="1" style="background-size:100px " step="1"/>
 						</div>
 						<div class="widget price text-center">
 							<h4>Price</h4>
@@ -136,7 +58,7 @@
 			<!-- Left sidebar -->
 			<div class="col-lg-8">
 				<div class="product-details" >
-					<h1 class="product-title" th:text="${product.getName()}"><a th:href='@{${"product?id=" + product.getID()}}'></a></h1>
+					<h1 class="product-title" th:text="${product.getProductName()}"><a th:href='@{${"product?id=" + product.getID()}}'></a></h1>
 
 					<div class="content mt-5 pt-5">
 						<ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
@@ -165,35 +87,8 @@
 
 
 <!-- Footer Bottom -->
-<footer class="footer-bottom">
-	<!-- Container Start -->
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6 text-center text-lg-left mb-3 mb-lg-0">
-				<!-- Copyright -->
-				<div class="copyright">
-					<p>Copyright © <script>
-						var CurrentYear = new Date().getFullYear()
-						document.write(CurrentYear)
-					</script>20232023. Designed &amp; Developed by <a class="text-white" href="https://themefisher.com">Themefisher</a></p>
-				</div>
-			</div>
-			<div class="col-lg-6">
-				<!-- Social Icons -->
-				<ul class="social-media-icons text-center text-lg-right">
-					<li><a class="fa fa-facebook" href="https://www.facebook.com/themefisher"></a></li>
-					<li><a class="fa fa-twitter" href="https://www.twitter.com/themefisher"></a></li>
-					<li><a class="fa fa-pinterest-p" href="https://www.pinterest.com/themefisher"></a></li>
-					<li><a class="fa fa-github-alt" href="https://www.github.com/themefisher"></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- Container End -->
-	<!-- To Top -->
-	<div class="scroll-top-to" style="display: none;">
-		<i class="fa fa-angle-up"></i>
-	</div>
+<footer class="footer-bottom" th:replace="~{Layout/footer}">
+	
 </footer>
 
 <!--
