@@ -111,28 +111,6 @@
                                     <td class="product-category"><span class="categories"
                                             th:text="${item.getProducts().getCategory().getCategoryName()}">Laptops</span></td>
                                     <td class="product-category"><span class="categories" th:text="${item.products.getProductPrice()}"></span></td>
-                                    <td class="action" data-title="Action">
-                                        <div class="">
-                                            <ul class="list-inline justify-content-center">
-                                                <li class="list-inline-item">
-                                                    <a th:href="@{${'product?id=' + item.getProducts().getID()}}"
-                                                        data-toggle="tooltip" data-placement="top" title=""
-                                                        class="view" data-original-title="View">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a class="delete" data-toggle="tooltip" data-placement="top"
-                                                        title="" th:href="@{${'cart?id='+item.getId()}}"
-                                                        data-original-title="Delete">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-
-                                        </div>
-
                                     </td><td class="action" data-title="Action">
                                         <div class="">
                                             <ul class="list-inline justify-content-center">
@@ -145,7 +123,7 @@
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <a class="delete" data-toggle="tooltip" data-placement="top"
-                                                        title="" th:href="@{${'cart?id='+item.getId()}}"
+                                                        title="" th:href="@{${'cart/delete?id='+item.getId()}}"
                                                         data-original-title="Delete">
                                                         <i class="fa fa-trash"></i>
                                                     </a>

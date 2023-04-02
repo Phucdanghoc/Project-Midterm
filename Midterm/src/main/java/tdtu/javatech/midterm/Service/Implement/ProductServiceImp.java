@@ -54,4 +54,9 @@ public class ProductServiceImp implements ProductService {
         return  productRepository.findAllByProductPriceGreaterThan(price);
     }
 
+    @Override
+    public List<Product> searchByPriceLessThan(Double price) {
+        return  productRepository.findAllByProductPriceLessThan(price);
+    }
+
 }

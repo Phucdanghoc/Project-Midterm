@@ -237,7 +237,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `address`, `created_at`, `email`, `name`, `password`, `phone`) VALUES
-(1, 'HCM', '23-3-2020', 'cus', 'Customer', '0', '0');
+(1, 'HCM', '23-3-2020', 'customer@gmail.com', 'Customer', '0', '0');
 
 -- --------------------------------------------------------
 

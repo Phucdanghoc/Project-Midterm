@@ -31,9 +31,9 @@ public class CartController {
         System.out.println(userService.getById(request.getAttribute("id").toString()).toString());
         return "cart";
     }
-    @DeleteMapping("/cart/delete")
+    @GetMapping("/cart/delete")
     public String delete(@RequestParam("id") String id){
         cartService.Delete(id);
-        return "redirect:cart?delete=true";
+        return "redirect:/?delete=true";
     }
 }

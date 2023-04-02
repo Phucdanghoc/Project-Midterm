@@ -1,5 +1,6 @@
 package tdtu.javatech.midterm.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,15 +32,17 @@ public class Product  {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "COL_ID")
-
+    @JsonIgnore
     private Color color;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CAT_ID")
+    @JsonIgnore
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BRA_ID")
+    @JsonIgnore
     private Brand brand;
 
 

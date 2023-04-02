@@ -17,6 +17,7 @@ public interface ProductService {
     List<Product> searchByCategory(String category);
     List<Product> searchByColor(String color);
     List<Product> searchByPriceGreaterThan(Double price);
+    List<Product> searchByPriceLessThan(Double price);
 
 
 

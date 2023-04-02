@@ -29,7 +29,6 @@ public class HomeController {
     }
     @PostMapping("")
     public String Search(Model model, @RequestParam("key") String key, @RequestParam("type") String type){
-        System.out.println(key);
         switch (type){
             case "1":
                 model.addAttribute("items",productService.searchByName(key));
@@ -39,6 +38,12 @@ public class HomeController {
                 return "index";
             case "3":
                 model.addAttribute("items",productService.searchByColor(key));
+                return "index";
+            case "4":
+                model.addAttribute("items",productService.searchByPriceGreaterThan(Double.parseDouble(key)));
+                return "index";
+            case "5":
+                model.addAttribute("items",productService.searchByPriceLessThan(Double.parseDouble(key)));
                 return "index";
         }
         model.addAttribute("items",productService.getAll());
