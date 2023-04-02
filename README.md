@@ -78,6 +78,23 @@
  ## CURL command:
 
 ### Product API  
-`localhost:8000/api/product`
+ - get all products : `localhost:8000/api/product`
+ - get one product : `localhost:8000/api/product/get/{id}`
+ - add new product : `localhost:8000/api/product/add`
+ - update product  : `localhost:8000/api/product/update/{id}`
+ - delete product : `localhost:8000/api/product/delete/{id}`
+ Example  - GET : 
+ ![image](https://user-images.githubusercontent.com/94584468/229361289-1bd57073-2390-49a0-8d34-7607972c4221.png)
 
-###
+### Cart API  
+ - get all carts : `localhost:8000/api/cart`
+ - get one cart : `localhost:8000/api/cart/get/{id}`
+ - add new cart : `localhost:8000/api/cart/add`
+ - update cart  : `localhost:8000/api/cart/update/{id}`
+ - delete cart : `localhost:8000/api/cart/delete/{id}`
+  Example  - GET : 
+  ![image](https://user-images.githubusercontent.com/94584468/229361393-38daa7fd-9a1d-40ac-904f-a91eddd043a8.png)
+
+Thanks for read !
+ 
+ 
