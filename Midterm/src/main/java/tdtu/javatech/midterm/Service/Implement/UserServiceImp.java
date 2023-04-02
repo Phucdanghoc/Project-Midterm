@@ -3,8 +3,7 @@ import tdtu.javatech.midterm.Model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tdtu.javatech.midterm.Repository.Person.UserRepository;
-import tdtu.javatech.midterm.Repository.Product.ProductRepository;
+import tdtu.javatech.midterm.Repository.UserRepository;
 import tdtu.javatech.midterm.Service.UserService;
 
 @Service

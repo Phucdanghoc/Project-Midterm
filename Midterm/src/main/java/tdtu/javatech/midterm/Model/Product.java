@@ -1,15 +1,15 @@
 package tdtu.javatech.midterm.Model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 @Entity
 @Table(name = "product")
 public class Product  {
@@ -20,7 +20,8 @@ public class Product  {
     @Column(name = "name")
     private String productName;
 
-    private Double Price;
+    @Column(name = "price")
+    private Double productPrice;
 
     private String Detail;
 

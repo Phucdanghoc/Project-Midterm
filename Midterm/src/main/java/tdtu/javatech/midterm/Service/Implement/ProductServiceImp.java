@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import tdtu.javatech.midterm.Model.Category;
 import tdtu.javatech.midterm.Model.Color;
 import tdtu.javatech.midterm.Model.Product;
-import tdtu.javatech.midterm.Repository.Product.CategoryRepository;
-import tdtu.javatech.midterm.Repository.Product.ColorRepository;
-import tdtu.javatech.midterm.Repository.Product.ProductRepository;
+import tdtu.javatech.midterm.Repository.CategoryRepository;
+import tdtu.javatech.midterm.Repository.ColorRepository;
+import tdtu.javatech.midterm.Repository.ProductRepository;
 import tdtu.javatech.midterm.Service.ProductService;
 
 import java.util.List;
@@ -48,4 +48,10 @@ public class ProductServiceImp implements ProductService {
         Color color1 = colorRepository.findByColorName(color);
         return productRepository.findProductsByColor(color1);
     }
+
+    @Override
+    public List<Product> searchByPriceGreaterThan(Double price) {
+        return  productRepository.findAllByProductPriceGreaterThan(price);
+    }
+
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import tdtu.javatech.midterm.Model.User;
 import tdtu.javatech.midterm.Service.CartService;
 import tdtu.javatech.midterm.Service.UserService;
 
@@ -22,9 +23,11 @@ public class CartController {
         if (request.getAttribute("id")==null){
             return "redirect:login";
         }
+        User user = userService.getById(request.getAttribute("id").toString());
         model.addAttribute("pageTitle", "Cart");
-        model.addAttribute("items", cartService.getAll());
-        model.addAttribute("user",userService.getById(request.getAttribute("id").toString()));
+        model.addAttribute("items", cartService.getAll(user));
+        model.addAttribute("user",user);
+        model.addAttribute("total",cartService.Total(user));
         System.out.println(userService.getById(request.getAttribute("id").toString()).toString());
         return "cart";
     }

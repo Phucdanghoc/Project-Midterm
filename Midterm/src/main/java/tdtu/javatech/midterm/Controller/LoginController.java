@@ -16,8 +16,6 @@ import tdtu.javatech.midterm.Service.UserService;
 
 @Controller
 public class LoginController {
-
-
     @Autowired
     private UserService userService;
     @GetMapping("login")
@@ -34,7 +32,7 @@ public class LoginController {
             return "redirect:/";
         }
         else {
-            return  "register";
+            return  "login";
         }
     }
 

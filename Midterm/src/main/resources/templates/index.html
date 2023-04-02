@@ -41,15 +41,15 @@ Essential stylesheets
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="trending-ads-slide slick-initialized slick-slider" th:each="item:${items}">
+                    <div class="trending-ads-slide slick-initialized slick-slider" th:each="item : ${items}">
                         <div class="col-sm-12 col-lg-4 slick-slide slick-cloned" tabindex="-1"
-                            style="width: 350px;height: 430.438px;" id="" aria-hidden="true">
+                            style="width: 350px;height: 430px;" id="" aria-hidden="true">
                             <div class="product-item bg-light">
                                 <div class="card">
                                     <div class="thumb-content">
                                         <a th:href='@{${"/product?id=" + item.getID()}}' tabindex="-1">
                                             <img class="card-img-top img-fluid" th:src='${item.getIMG_SRC()}'
-                                                alt="Card image cap">
+                                                alt="Card image cap" style="width: 300px;height: 300px">
                                         </a>
                                     </div>
                                     <div class="card-body">
@@ -67,7 +67,7 @@ Essential stylesheets
                                             <li class="list-inline-item">
                                                 <a th:href='@{${"product?category=" + item.getCategory().getCategoryName()}}'
                                                     tabindex="-1"><i class="card-title pricing-card-title "
-                                                        th:text="${item.getPrice()+'$'}"></i></a>
+                                                        th:text="${item.getProductPrice()+'đ'}"></i></a>
                                             </li>
                                         </ul>
 

@@ -1,18 +1,11 @@
 package tdtu.javatech.midterm.Controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tdtu.javatech.midterm.Model.Cart;
-import tdtu.javatech.midterm.Model.Product;
-import tdtu.javatech.midterm.Model.User;
-import tdtu.javatech.midterm.Repository.Action.CartRepository;
-import tdtu.javatech.midterm.Repository.Product.ProductRepository;
 import tdtu.javatech.midterm.Service.CartService;
 import tdtu.javatech.midterm.Service.ProductService;
 import tdtu.javatech.midterm.Service.UserService;
