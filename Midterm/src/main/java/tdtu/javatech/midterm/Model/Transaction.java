@@ -12,40 +12,36 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "transaction")
+@Table(name = "transactions")
 public class Transaction{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 
-    private double total;
+    @Column(name="price")
+    private double price;
 
-    private String message;
+    @Column(name = "note")
+    private String note;
 
-    private int status;
+    @Column(name = "status")
+    private String status;
 
+    @Column(name = "location")
+    private String location;
+
+    @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Date created;
-
-
-    @ManyToOne
-    @JoinColumn(name = "CAR_ID")
-    @JsonIgnore
-    private Cart cart ;
+    private java.util.Date created_at;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "Id=" + Id +
-                ", total=" + total +
-                ", message='" + message + '\'' +
-                ", status=" + status +
-                '}';
-    }
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    @JsonIgnore
+    private Product product;
 }
 

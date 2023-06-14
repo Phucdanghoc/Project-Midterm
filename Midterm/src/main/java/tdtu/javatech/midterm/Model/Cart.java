@@ -4,38 +4,33 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
+@Table(name = "carts")
 @Setter
-@Table(name = "cart")
-public class Cart{
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
-    private int Quantity;
-    private String created_at;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "PRO_ID")
+    @JoinColumn(name = "user_id")
     @JsonIgnore
-    private Product products;
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "USE_ID")
     private User user;
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "Id=" + Id +
-                ", Quantity=" + Quantity +
-                ", created_at='" + created_at + '\'' +
-                ", products=" + products +
-                ", user=" + user +
-                '}';
-    }
+
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    @JsonIgnore
+    private Product product;
+
+    @Column(name = "quantity")
+    private Integer quantity;
+
+    @Column(name = "created_at")
+    private LocalDateTime created_at;
+
 }

@@ -13,19 +13,17 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(name = "category")
+@Table(name = "categorys")
 public class Category{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 
     @Column(name = "name")
-    private String categoryName;
+    private String name;
+
     @OneToMany(mappedBy = "ID",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Product> products;
-
-
-
 
 }

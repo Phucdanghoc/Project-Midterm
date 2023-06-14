@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -12,50 +14,42 @@ import java.io.Serializable;
 @Setter
 @Getter
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
 
-    @Column(name = "name")
-    private String productName;
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "price")
-    private Double productPrice;
+    private Double price;
 
-    private String Detail;
+    @Column(name = "detail")
+    private String detail;
 
-    private double Rate;
+    @Column(name = "quantity")
+    private int quantity;
 
-    private String IMG_SRC;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "COL_ID")
-    @JsonIgnore
-    private Color color;
+    @Column(name = "created_at")
+    private LocalDateTime created_at;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CAT_ID")
+    @JoinColumn(name = "category_id")
     @JsonIgnore
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BRA_ID")
-    @JsonIgnore
-    private Brand brand;
+    @Column(name = "status")
+    private String status;
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<Image> images;
 
-//    @Override
-//    public String toString() {
-//        return "Product{" +
-//                "ID=" + ID +
-//                ", Name='" + Name + '\'' +
-//                ", Price=" + Price +
-//                ", Detail='" + Detail + '\'' +
-//                ", Rate=" + Rate +
-//                ", IMS_SRC='" + IMG_SRC + '\'' +
-//                '}';
-//    }
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "product")
+    private Cart cart;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "product")
+    private Transaction transaction;
 
 }
